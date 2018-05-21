@@ -1,1 +1,7 @@
 <h1> Token </h1>
+
+<%= form_for(current_user, url: token_path, method: 'get') do |f| %>
+  <%= "What is your Sentry Authentication Token?" %>
+  <%= f.text_field :sentry_token %>
+  <%= f.submit "Start Using Sentry-Debugger", :class => "btn btn-primary" %>
+<% end %>
