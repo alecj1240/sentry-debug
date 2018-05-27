@@ -1,6 +1,15 @@
 <% if user_signed_in? %>
-  <h1>Pages#index</h1>
-  <p>Find me in app/views/pages/index.html.erb</p>
+  <h1 class="center">Your Errors</h1>
+
+  <% @sentryErrors.each do |error| %>
+    <b> Title </b> <%= error["title"] %> <br>
+    <b> Culprit: </b> <%= error["culprit"] %> <br>
+    <b> Id </b><%= error["id"] %>
+    <b> Count </b> <%= error["count"] %>
+    <b> Value </b> <%= error["metadata"]["value"] %> <br>
+    <%= "-----------------------------------------------------" %>
+    <br>
+  <% end %>
 <% else %>
   <%= render "pages/landing" %>
 <% end %>
