@@ -7,7 +7,7 @@ class PagesController < ApplicationController
       redirect_to token_path if current_user.sentry_token.nil?
       uri = URI.parse("https://app.getsentry.com/api/0/projects/christopher-bot/christopher-bot/issues/")
       request = Net::HTTP::Get.new(uri)
-      request["Authorization"] = "Bearer 0a33336634774d139840debc5ff664bfe977d6b433194b8a8c53fa92e54ea849"
+      request["Authorization"] = "Bearer #{current_user.sentry_token}"
       request["statsPeriod"] = "24h"
       req_options = {
         use_ssl: uri.scheme == "https",
@@ -15,8 +15,19 @@ class PagesController < ApplicationController
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
-
       @sentryErrors = JSON.parse(response.body)
+=begin
+      uri = URI.parse("https://www.googleapis.com/customsearch/v1?q=NoMethodError+update&cx=001638859173749984711:glesaa6k8uo&key=AIzaSyBQBjc5W-ACdzZW3zK_eq48s4NbwGrEWLQ")
+      request = Net::HTTP::Get.new(uri)
+      req_options = {
+        use_ssl: uri.scheme == "https",
+      }
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+      @googleResults = response.body
+      puts @googleResults
+=end
 
     end
     #conn = Faraday.new(:url => "https://app.getsentry.com")

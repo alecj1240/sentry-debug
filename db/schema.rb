@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521012325) do
+ActiveRecord::Schema.define(version: 20180529044008) do
+
+  create_table "errors", force: :cascade do |t|
+    t.string "culprit"
+    t.string "title"
+    t.string "sentry_id"
+    t.string "value"
+    t.string "count"
+    t.string "project_id"
+    t.string "user_id"
+    t.string "links"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
