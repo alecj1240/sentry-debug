@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529044008) do
+ActiveRecord::Schema.define(version: 20180529052902) do
 
-  create_table "errors", force: :cascade do |t|
+  create_table "sentryerrors", force: :cascade do |t|
     t.string "culprit"
     t.string "title"
     t.string "sentry_id"

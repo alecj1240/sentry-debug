@@ -14,6 +14,11 @@ task :check_sentry => :environment do
     end
     @sentryErrors = JSON.parse(response.body)
 
-    puts @sentryErrors[0]
+    @sentryErrors.each do |error|
+      if Sentryerror.find_by(title: error["title"]).nil?
+        newSentryError = user.sentryerrors.new(culprit: error["culprit"], title: error["title"], sentry_id: error["id"], value: error["metadata"]["value"], count: error["count"])
+        newSentryError.save
+      end
+    end
   end
 end
