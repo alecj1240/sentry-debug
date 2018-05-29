@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def index
     if user_signed_in?
       redirect_to token_path if current_user.sentry_token.nil?
-      
+      @sentryErrors = current_user.sentryerrors
 =begin
       uri = URI.parse("https://www.googleapis.com/customsearch/v1?q=NoMethodError+update&cx=001638859173749984711:glesaa6k8uo&key=AIzaSyBQBjc5W-ACdzZW3zK_eq48s4NbwGrEWLQ")
       request = Net::HTTP::Get.new(uri)
