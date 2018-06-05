@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+      <h2 class="card-title"> <%= @sentryerror.title %> </h2>
+      <h4 class="card-subtitle mb-2 text-muted"> Count: <%= @sentryerror.count %> </h4>
+      <p class="card-text"> <b> The Culprit: </b> <%= @sentryerror.culprit %> </p>
+      <p class="card-text"> <b> Error Message: </b> <%= @sentryerror.value %> </p>
+      <% @sentryerror.links.split(",").each do |googleLink| %>
+           <% link = googleLink.split("splithere") %>
+           <%= link_to link[1], link[0], class: "card-link" %> <br>
+       <% end %>
+  </div>
+</div>
