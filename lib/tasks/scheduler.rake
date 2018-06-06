@@ -1,5 +1,6 @@
 desc "This task is to check for new Sentry errors and submit to DB"
 task :check_sentry => :environment do
+  require 'json'
   @users = User.all
   @users.each do |user|
     uri = URI.parse("https://app.getsentry.com/api/0/projects/christopher-bot/christopher-bot/issues/")
@@ -29,12 +30,12 @@ task :check_sentry => :environment do
 
         counter = 1
         @linksString = String.new
-        @googleResults = eval(response.body)
-        @googleResults[:items].each do |link|
+        @googleResults = JSON.parse(response.body)
+        @googleResults["items"].each do |link|
           if counter == 1
-            @linksString = link[:link].to_s
+            @linksString = link["link"].to_s + "splithere" + link["title"].to_s
           elsif counter > 1 && counter <= 5
-            @linksString = @linksString + ",#{link[:link].to_s}"
+            @linksString = @linksString + ",#{link['link'].to_s}" + "splithere" + "#{link['title'].to_s}"
           else
           end
           counter += 1
