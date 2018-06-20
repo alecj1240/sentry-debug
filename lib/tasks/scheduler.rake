@@ -35,7 +35,7 @@ task :check_sentry => :environment do
           if counter == 1
             @linksString = link["link"].to_s + "splithere" + link["title"].to_s
           elsif counter > 1 && counter <= 5
-            @linksString = @linksString + ",#{link['link'].to_s}" + "splithere" + "#{link['title'].to_s}"
+            @linksString = @linksString + "newlinkishere#{link['link'].to_s}" + "splithere" + "#{link['title'].to_s}"
           else
           end
           counter += 1
