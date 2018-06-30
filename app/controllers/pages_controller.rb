@@ -48,7 +48,13 @@ class PagesController < ApplicationController
           counter = 0
           @answerInfo = Array.new
           answersHash["items"].each do |item|
-            @answerInfo.push([item["is_accepted"].to_s, link + "#" + "#{item['answer_id'].to_s}"])
+            if item["is_accepted"].to_s == "true"
+              @accepted = 1
+            else
+              @accepted = 0
+            end
+            @answerInfo.push([@accepted, link + "#" + "#{item['answer_id'].to_s}"])
+            @answerInfo = @answerInfo.sort_by{|b| -b[0]}
           end
         return @answerInfo
       end
