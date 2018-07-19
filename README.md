@@ -22,9 +22,7 @@ A huge component of this web app is that we take the data right from Stack Overf
 
 ## Authors
 
-* **Alec Jones** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Alec Jones** - he's a pretty cool guy
 
 ## License
 
