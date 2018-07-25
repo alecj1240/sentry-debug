@@ -43,7 +43,7 @@ class PagesController < ApplicationController
       if @question_id.to_i != 0
         # Running the question id through the stack overflow API
         # will fetch the answers to the question
-        uri = URI.parse("https://api.stackexchange.com/2.2/questions/#{@question_id}/answers?order=desc&sort=activity&site=stackoverflow")
+        uri = URI.parse("https://api.stackexchange.com/2.2/questions/#{@question_id}/answers?order=desc&sort=activity&site=stackoverflow&filter=withbody")
         request = Net::HTTP::Get.new(uri)
         req_options = {
           use_ssl: uri.scheme == "https",
@@ -67,8 +67,9 @@ class PagesController < ApplicationController
             else
               @accepted = 0
             end
+            @codeBody = item["body"]
             # push the data into the @answerInfo
-            @answerInfo.push([@accepted, link + "#" + "#{item['answer_id'].to_s}"])
+            @answerInfo.push([@accepted, link + "#" + "#{item['answer_id'].to_s}", @codeBody])
             # sort so the approved answers are on top
             @answerInfo = @answerInfo.sort_by{|b| -b[0]}
           end

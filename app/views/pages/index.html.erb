@@ -1,14 +1,16 @@
 <% if user_signed_in? %>
   <h1 class="center">Your Errors</h1>
   <% @sentryErrors.each do |error| %>
-  <div class="card">
-    <%= link_to show_path(error_id: error.id), class: "card-link" do %>
-      <div class="card-body">
-        <h5 class="card-title"> <%= error.title %> </h5>
-        <h6 class="card-subtitle mb-2 text-muted"> Count: <%= error.count %> </h6>
-        <p class="card-text"> <%= error.culprit %> </p>
-      </div>
-    <% end %>
+  <div class="display-cards">
+    <div class="card">
+      <%= link_to show_path(error_id: error.id), class: "card-link" do %>
+        <div class="card-body">
+          <h5 class="card-title"> <%= error.title %> </h5>
+          <h6 class="card-subtitle mb-2 text-muted"> Count: <%= error.count %> </h6>
+          <p class="card-text"> <%= error.culprit %> </p>
+        </div>
+      <% end %>
+    </div>
   </div>
   <% end %>
 <% else %>

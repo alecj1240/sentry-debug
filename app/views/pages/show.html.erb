@@ -1,41 +1,22 @@
+
 <div class="card">
   <div class="card-body">
       <h2 class="card-title"> <%= @sentryerror.title %> </h2>
       <h4 class="card-subtitle mb-2 text-muted"> Count: <%= @sentryerror.count %> </h4>
       <p class="card-text"> <b> The Culprit: </b> <%= @sentryerror.culprit %> </p>
       <p class="card-text"> <b> Error Message: </b> <%= @sentryerror.value %> </p>
-      <% counter = 0 %>
       <% @sentryerror.links.split("newlinkishere").each do |googleLink| %>
-           <% link = googleLink.split("splithere") %>
-
-           <button type="button" class="card-link" data-toggle="modal" data-target="#exampleModal<%= counter %>">
-              <%=  link[1] %> <br>
-           </button>
-           <div class="modal fade" id="exampleModal<%= counter %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Stack Overflow Answer</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <% @theAnswers = get_answer(link[0]) %>
-                  <% @theAnswers.each do |answer| %>
-                    <h4> Stack Overflow Answer: <% if answer[0] == 1 %> - <b><i>Approved Answer</i></b> <% end %></h4>
-                      <h5> Link: <%= link_to "Answer!", answer[1] %> </h5>
-                  <% end %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br><br>
-          <% counter += 1 %>
-       <% end %>
+        <% link = googleLink.split("splithere") %>
+        <% @theAnswers = get_answer(link[0]) %>
+        <% @theAnswers.each do |answer| %>
+          <h4> Stack Overflow Answer: <% if answer[0] == 1 %> - <b><i>Approved Answer</i></b> <% end %></h4>
+          <h5> Link: <%= link_to "Answer!", answer[1] %> </h5>
+          <div class="code-content">
+            <% str = answer[2].html_safe %>
+            <%= str %>
+          </div> 
+        <% end %>
+        <br><br>
+      <% end %>
   </div>
 </div>
